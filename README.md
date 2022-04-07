@@ -11,8 +11,10 @@ Tested only on Linux (Arch), using [kitty](https://github.com/kovidgoyal/kitty) 
 
 Make sure you use a font that has **bold** and *italic* variants in order for everything to work as expected.
 
-[Wallpaper](https://github.com/skinnzysan/Archdots2/blob/main/Pictures/wallpaper.jpg) by [skinnzysan](https://github.com/skinnzysan)
+
 Goes great along [cbonsai](https://gitlab.com/jallbrit/cbonsai)
+
+[Wallpaper](https://github.com/skinnzysan/Archdots2/blob/main/Pictures/wallpaper.jpg) by [skinnzysan](https://github.com/skinnzysan)
 # Installation
 
 Right now you can only clone and create a symlink perhaps like:
