@@ -1,12 +1,13 @@
 #include <ncurses.h>
 #include <string.h>
+#include <locale.h>
 
 int row, col;
 
 struct poemInfo
 {
   char title[64];
-  char author[32];
+  char author[64];
 };
 
 void clearCurrentLine()
@@ -18,8 +19,9 @@ void clearCurrentLine()
   move(y, x);
 }
 
-void centerType(char *value[])
+void centerType(char value[])
 {
+  strcpy(value, "");
   int ch;
 
   while (ch = getch()) {
@@ -29,7 +31,7 @@ void centerType(char *value[])
         return;
         break;
       case KEY_BACKSPACE:
-        strncat(value, "", 0); // TODO!!!
+        value[strlen(value) - 1] = '\0';
         clearCurrentLine();
         getyx(stdscr, y, x);
         mvprintw(y, (col - strlen(value)) / 2, "%s", value);
@@ -44,24 +46,30 @@ void centerType(char *value[])
   }
 }
 
-void requestInfo(WINDOW *window, struct poemInfo *info)
+void requestSingleInfo(char question[], char input[])
 {
-  char nameOfPoem[] = "NAME OF YOUR POEM";
   attron(A_BOLD);
-  mvprintw(row / 2, (col - strlen(nameOfPoem)) / 2, "%s", nameOfPoem),
+  mvprintw(row / 2, (col - strlen(question)) / 2, "%s", question),
   attroff(A_BOLD);
   move(row / 2 + 2, col / 2);
-  centerType(info->title);
-  // getch(info->title);
-  mvprintw(LINES - 2, 0, "You entered: %s", info->title);
-  // printf("Name of your poem: ");
-  // scanf("%s", &info->title);
-  // printf("Autho: ");
-  // scanf("%s", &info->author);
+  centerType(input);
+  clear();
+}
+
+void requestInfo(WINDOW *window, struct poemInfo *info)
+{
+  requestSingleInfo("NAME OF YOUR POEM", info->title);
+  clear();
+  requestSingleInfo("AUTHOR", info->author);
+
+  // TEST
+  mvprintw(LINES - 3, 0, "Name: %s", info->title);
+  mvprintw(LINES - 2, 0, "Author: %s", info->author);
 }
 
 int main(void)
 {
+  setlocale(LC_ALL, "");
   WINDOW *window = initscr();
   cbreak();
   noecho();
