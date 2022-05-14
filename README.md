@@ -1,6 +1,9 @@
 
 # cpoem
 
+# UNDER CONSTRUCTION
+Refactoring to C in progress...
+
 ![Example](/assets/poem.png)
 
 cpoem is a lightweight-poorly-written cli program to help you easily write a poem along the way.
